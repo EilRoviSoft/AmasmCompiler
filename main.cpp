@@ -4,19 +4,26 @@
 
 //compiler
 #include "src/Scanner.hpp"
+#include "src/Parser.hpp"
 
 int main() {
-    compiler::Scanner scanner;
+	compiler::Scanner scanner;
+	compiler::Parser parser;
 
-    std::ifstream file("asm/test.asm");
+	//Scanning code
 
-    int err = scanner.scan(file);
+	std::ifstream file("asm/test.asm");
+	auto tokens = scanner.scan(file);
+	//auto tokens = scanner.release();
+	file.close();
 
-    file.close();
+	for (const auto& it : tokens) {
+		std::cout << compiler::to_string(it) << '\n';
+	}
 
-    for (const auto& it : scanner.tokens()) {
-        std::cout << compiler::to_string(it) << '\n';
-    }
+	//Parsing code
 
-    return 0;
+	parser.parse(std::move(tokens));
+
+	return 0;
 }
