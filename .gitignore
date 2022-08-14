@@ -30,3 +30,6 @@
 *.exe
 *.out
 *.app
+/.vs/AssemblyCompiler/v17
+/.vs/AssemblyCompiler/FileContentIndex
+/x64/Debug
